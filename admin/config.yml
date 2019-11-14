@@ -1,0 +1,110 @@
+backend:
+  name: git-gateway
+  branch: master
+media_folder: images
+public_folder: /images
+collections:
+  - name: config
+    label: Config
+    files:
+      - name: config
+        label: Config
+        file: _config.yml
+        fields:
+          - widget: string
+            name: title
+            label: Title
+            required: true
+            hint: Site title
+          - widget: hidden
+            name: baseurl
+            label: Base URL
+            required: false
+            hint: Serve the website from the given base URL
+          - widget: hidden
+            name: permalink
+            label: Permalink
+            required: false
+            default: '/posts/:slug:output_ext'
+            hint: 'The output path for your pages, posts, or collections.'
+          - widget: string
+            name: logo
+            label: Logo
+            required: true
+            hint: Your site name (logo)
+          - widget: hidden
+            name: sass
+            label: Sass
+            required: false
+          - widget: hidden
+            name: plugins
+            label: Plugins
+            required: false
+          - widget: hidden
+            name: exclude
+            label: Exclude
+            required: false
+            hint: Exclude directories and/or files from the conversion.
+  - name: home
+    label: Homes
+    folder: /
+    create: true
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - widget: string
+        name: title
+        label: Title
+        required: true
+        hint: The title of the page.
+      - widget: string
+        name: description
+        label: Description
+        required: false
+        hint: Baseline of your homepage
+      - widget: hidden
+        name: layout
+        label: Layout
+        required: true
+        default: home
+      - widget: markdown
+        name: body
+        label: Content
+        required: false
+        hint: Page content
+    filter:
+      field: layout
+      value: home
+  - name: items
+    label: Items
+    files:
+      - name: items
+        label: Items
+        file: _data/items.json
+        fields:
+          - widget: list
+            name: item
+            label: Item
+            required: false
+            hint: An item to be placed
+            fields:
+              - widget: image
+                name: image
+                label: Item image
+                required: true
+              - widget: string
+                name: title
+                label: Title
+                required: true
+              - widget: string
+                name: description
+                label: Description
+                required: true
+              - widget: string
+                name: linkUrl
+                label: URL
+                required: true
+              - widget: string
+                name: link
+                label: Link title
+                required: true
